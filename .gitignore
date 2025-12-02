@@ -1,0 +1,70 @@
+# ========================
+# Django
+# ========================
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# Base de données locale
+db.sqlite3
+db.sqlite3-journal
+
+# Migrations compilées
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+
+# ========================
+# Environnement / Secrets
+# ========================
+.env
+*.env
+.envrc
+
+# Virtualenv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ========================
+# Logs / Debug
+# ========================
+*.log
+*.pot
+*.mo
+*.swp
+*.swo
+*.sqlite3
+
+# ========================
+# IDE / Éditeurs
+# ========================
+.vscode/
+.idea/
+*.iml
+
+# ========================
+# OS
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Static / Media (si générés localement)
+# ========================
+/staticfiles/
+*/media/
+
+# ========================
+# Autres outils
+# ========================
+.coverage
+.tox/
+.pytest_cache/
+dist/
+build/
+*.egg-info/
