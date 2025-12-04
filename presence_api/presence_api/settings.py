@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'mention',
     'parcours',
     'niveau',
-    'users'
+    'users',
+    'etudiant'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
