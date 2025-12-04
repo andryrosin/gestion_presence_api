@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'annee_universitaire',
     'universite',
+    'etablissement',
     'mention',
     'parcours',
     'niveau',
