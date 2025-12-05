@@ -1,46 +1,53 @@
 from rest_framework import serializers
 from .models import Inscription
 from etudiant.models import Etudiant
+from detection.detection import FaceModel
 
+model = FaceModel()
 
 class InscriptionDirectSerializer(serializers.ModelSerializer):
-
-    nom = serializers.CharField()
-    prenom = serializers.CharField(required=False, allow_blank=True)
-    matricule = serializers.CharField(required=False, allow_blank=True)
-    genre = serializers.CharField()
+    nom = serializers.CharField(write_only=True)
+    prenom = serializers.CharField(required=False, allow_blank=True,write_only=True)
+    matricule = serializers.CharField(required=False, allow_blank=True,write_only=True)
+    genre = serializers.CharField(write_only=True)
+    photo = serializers.ImageField(required=True,write_only=True)
 
     class Meta:
         model = Inscription
         fields = [
             'id',
-            'nom',
+            'nom', 
             'prenom', 
             'matricule', 
-            'genre',
+            'genre', 
+            'photo',
             'niveau', 
-            'annee', 
+            'annee',
             'created'
         ]
         read_only_fields = ['created']
 
     def create(self, validated_data):
-        # Extraire les données de l'étudiant
         nom = validated_data.pop('nom')
         prenom = validated_data.pop('prenom', None)
         matricule = validated_data.pop('matricule', None)
         genre = validated_data.pop('genre')
+        photo = validated_data.pop('photo')
 
-        # Créer l'étudiant
         etudiant = Etudiant.objects.create(
             nom=nom,
             prenom=prenom,
             matricule=matricule,
             genre=genre,
-            embedding=None  # ou une valeur vide si pas encore généré
+            photo=photo
         )
 
-        # Créer l’inscription
+        if etudiant.photo:
+            emb,box = model.detect_face(etudiant.photo.path)
+            if emb is not None:
+                etudiant.embedding = emb
+                etudiant.save()
+
         inscription = Inscription.objects.create(
             etudiant=etudiant,
             **validated_data
