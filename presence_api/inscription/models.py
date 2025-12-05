@@ -6,17 +6,18 @@ class Inscription(models.Model):
     annee = models.ForeignKey(
         AnneeUniversitaire,
         on_delete=models.CASCADE,
-        related_name="annees"
+        related_name="inscriptions"
     )
     niveau = models.ForeignKey(
         Niveau,
         on_delete=models.CASCADE,
-        related_name="niveaux"
+        related_name="inscriptions"
     )
-    Etudiant = models.ForeignKey(
+    etudiant = models.ForeignKey(
         Etudiant,
         on_delete=models.CASCADE,
-        related_name="etudiants"
+        related_name="inscriptions",
+        null=True
     )
     created = models.DateField(auto_now_add=True)
 
