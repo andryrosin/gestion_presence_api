@@ -7,4 +7,5 @@ class Etudiant(models.Model):
         embedding = VectorField(dimensions=528)
         matricule = models.CharField(null=True,max_length=15)
         genre = models.CharField(default='H',max_length=2)
+        photo = models.ImageField(upload_to='photos/', blank=True, null=True)
 
