@@ -7,7 +7,7 @@ class EtablissementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Etablissement
         fields = ['id', 'code','designation','universite']
-class CreateEntiteSerializer(serializers.ModelSerializer):
+class CreateEtablissementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Etablissement
         fields = ['id', 'code','designation','universite']
