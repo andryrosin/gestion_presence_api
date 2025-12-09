@@ -2,7 +2,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Inscription
-from .serializers import InscriptionDirectSerializer
+from .serializers import InscriptionDirectSerializer,ReInscriptionSerializer
 from rest_framework.permissions import AllowAny
 
 class InscriptionCreateAPIView(generics.CreateAPIView):
@@ -18,3 +18,8 @@ class InscriptionCreateAPIView(generics.CreateAPIView):
             self.get_serializer(inscription).data,
             status=status.HTTP_201_CREATED
         )
+class ReInscriptionCreateAPIView(generics.CreateAPIView):
+    permission_classes=[AllowAny]
+    queryset = Inscription.objects.all()
+    serializer_class = ReInscriptionSerializer
+    parser_classes = [MultiPartParser, FormParser]

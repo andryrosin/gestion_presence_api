@@ -3,15 +3,24 @@ from .models import Inscription
 from etudiant.models import Etudiant
 from detection.detection import FaceModel
 
-model = FaceModel()
-
+class ReInscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inscription
+        fields = [
+            'id',
+            'etudiant', 
+            'niveau', 
+            'annee',
+            'created'
+        ]
+        read_only_fields = ['created']
 class InscriptionDirectSerializer(serializers.ModelSerializer):
+    model = FaceModel()
     nom = serializers.CharField(write_only=True)
     prenom = serializers.CharField(required=False, allow_blank=True,write_only=True)
     matricule = serializers.CharField(required=False, allow_blank=True,write_only=True)
     genre = serializers.CharField(write_only=True)
     photo = serializers.ImageField(required=True,write_only=True)
-
     class Meta:
         model = Inscription
         fields = [

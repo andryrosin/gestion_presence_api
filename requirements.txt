@@ -6,8 +6,10 @@ pillow
 django-cors-headers
 python-decouple
 pgvector
+tensorflow
+scipy
 mtcnn 
 keras-facenet 
 opencv-python 
-numpy *
+numpy
 faiss-cpu
